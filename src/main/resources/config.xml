@@ -1,0 +1,6 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd ">
+    <bean id="englishTranslationService" class="sk.stuba.fei.uim.asos.cvicenie1.dependencyinjection.EnglishTranslationService"/>
+    <bean id="germanTranslationService" class="sk.stuba.fei.uim.asos.cvicenie1.dependencyinjection.GermanTranslationService"/>
+    <bean id="slovakTranslationService" class="sk.stuba.fei.uim.asos.cvicenie1.dependencyinjection.SlovakTranslationService"/>
+</beans>

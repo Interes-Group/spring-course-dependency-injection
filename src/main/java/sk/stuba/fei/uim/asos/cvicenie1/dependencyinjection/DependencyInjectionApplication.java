@@ -1,39 +1,24 @@
 package sk.stuba.fei.uim.asos.cvicenie1.dependencyinjection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
-@SpringBootApplication
-public class DependencyInjectionApplication implements CommandLineRunner {
+public class DependencyInjectionApplication {
+
+    private final static Logger log = Logger.getLogger(DependencyInjectionApplication.class.getSimpleName());
 
     public static void main(String[] args) {
-        SpringApplication.run(DependencyInjectionApplication.class, args);
-    }
-
-    private final static Logger log = LoggerFactory.getLogger(DependencyInjectionApplication.class);
-
-    private final List<TranslationService> services;
-
-    @Autowired
-    public DependencyInjectionApplication(List<TranslationService> services) {
-        this.services = services;
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        for (TranslationService service : services) {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config.xml"});
+        Map<String, TranslationService> services = context.getBeansOfType(TranslationService.class);
+        for (TranslationService service : services.values()) {
             log.info(service.translate("nieco"));
         }
-
         /*
         Java SE 8 Streams:
-        services.forEach(service -> log.info(service.translate("nieco")));
+        services.forEach((s, service) -> log.info(service.translate("nieco")));
         */
     }
 }
